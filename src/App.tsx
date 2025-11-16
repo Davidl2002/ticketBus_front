@@ -41,7 +41,7 @@ function App() {
   }, []);
 
   // Condición para determinar si aplicar o no DefaultLayout
-  const isAuthRoute = pathname === '/auth/signin';
+  const isAuthRoute = pathname === '/auth/signin' || pathname === '/auth/signup';
 
   return loading ? (
     <Loader />
@@ -57,6 +57,16 @@ function App() {
                   <>
                     <PageTitle title="Signin | ChaskiPass" />
                     <SignIn />
+                  </>
+              }
+            />
+            <Route
+              path="/auth/signup"
+              element={
+                authUser ? <Navigate to='/' /> :
+                  <>
+                    <PageTitle title="Signup | ChaskiPass" />
+                    <SignUp />
                   </>
               }
             />
@@ -95,17 +105,6 @@ function App() {
                   <>
                     <PageTitle title="Settings | ChaskiPass" />
                     <Settings />
-                  </>
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/auth/signup"
-              element={
-                <ProtectedRoute requiredRole={['admin']}>
-                  <>
-                    <PageTitle title="Signin | ChaskiPass" />
-                    <SignUp />
                   </>
                 </ProtectedRoute>
               }
