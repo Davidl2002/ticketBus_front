@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //my imports
 import ChaskiLogoW from '../../images/chaski-logo/chaskilogowhite.svg';
 import ChaskiLogoB from '../../images/chaski-logo/chaskilogoblack.svg';
@@ -18,6 +19,7 @@ const SignIn: React.FC = () => {
 
   const [inputLogin, setInputLogin] = useState<UserSignUpT>(initialStateLogin);
   const { loading, login } = useSignup();
+  const navigate = useNavigate();
 
   //e evento automatico cuando cambia el input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +57,7 @@ const SignIn: React.FC = () => {
                 </h2>
                 <form onSubmit={handleSubmit}>
                   <div className="mb-4">
-                    <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    <label htmlFor="email" className="mb-2.5 block font-medium text-black dark:text-white">
                       Email
                     </label>
                     <div className="relative">
@@ -63,6 +65,7 @@ const SignIn: React.FC = () => {
                         type="email"
                         placeholder="Correo electrónico"
                         id='email'
+                        autoComplete="email"
                         className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                         value={inputLogin.email}
                         onChange={handleChange}
@@ -75,7 +78,7 @@ const SignIn: React.FC = () => {
                   </div>
 
                   <div className="mb-4">
-                    <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    <label htmlFor="user_name" className="mb-2.5 block font-medium text-black dark:text-white">
                       Usuario
                     </label>
                     <div className="relative">
@@ -83,6 +86,7 @@ const SignIn: React.FC = () => {
                         type="text"
                         placeholder="Nombre de usuario"
                         id='user_name'
+                        autoComplete="username"
                         value={inputLogin.user_name}
                         onChange={handleChange}
                         className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -95,7 +99,7 @@ const SignIn: React.FC = () => {
                   </div>
 
                   <div className="mb-6">
-                    <label className="mb-2.5 block font-medium text-black dark:text-white">
+                    <label htmlFor="password" className="mb-2.5 block font-medium text-black dark:text-white">
                       Contraseña*
                     </label>
                     <div className="relative">
@@ -103,6 +107,7 @@ const SignIn: React.FC = () => {
                         type="password"
                         placeholder="***********"
                         id='password'
+                        autoComplete="current-password"
                         value={inputLogin.password}
                         onChange={handleChange}
                         className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
@@ -124,6 +129,18 @@ const SignIn: React.FC = () => {
 
                   </div>
                 </form>
+
+                <div className="mt-6 text-center">
+                  <p className="text-black dark:text-white">
+                    ¿No tienes una cuenta?{' '}
+                    <button
+                      type="button"
+                      onClick={() => navigate('/auth/signup')}
+                      className="text-primary hover:underline font-medium">
+                      Regístrate aquí
+                    </button>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
